@@ -1,3 +1,6 @@
+import EventContent from "@/components/event-detail/event-content";
+import EventLogistic from "@/components/event-detail/event-logistic";
+import EventSummary from "@/components/event-detail/event-summary";
 import { getEventById } from "@/dummy-data";
 import { useRouter } from "next/router"
 
@@ -8,14 +11,13 @@ export default function EventId() {
   const foundEvent = getEventById(eventId);
 
   if (!foundEvent) {
-    return null;
+    return <p>No event found!</p>;
   }
-  const { title, image, date, location } = foundEvent;
+  const { title, image, date, location, description } = foundEvent;
 
-  return <div>
-    <h1>{title}</h1>
-    <img src={`/${image}`} alt={title} />
-    <p>{date}</p>
-    <address>{location}</address>
-  </div>
+  return <>
+    <EventSummary title={title} />
+    <EventLogistic date={date} image={image} imageAlt={title} address={location} />
+    <EventContent>{description}</EventContent>
+  </>
 }
