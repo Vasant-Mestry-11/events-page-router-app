@@ -13,7 +13,7 @@ export default function EventItem({ title, image, date, location, id }) {
   })
 
   const formattedAddress = location.replace(', ', '\n')
-  const exploreEventLink = `/event/${id}`
+  const exploreEventLink = `/events/${id}`
 
   return <li className={classes.item}>
     <img src={`/${image}`} alt={title} />
