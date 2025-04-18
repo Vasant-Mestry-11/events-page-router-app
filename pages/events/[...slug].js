@@ -1,3 +1,4 @@
+import EventList from "@/components/events/event-list";
 import { getFilteredEvents } from "@/dummy-data";
 import { useRouter } from "next/router";
 
@@ -6,7 +7,7 @@ export default function FilteredEvents() {
   const { slug } = router.query;
 
   if (!slug) {
-    return <p>Loading...</p>
+    return <p className="center">Loading...</p>
   }
 
   const filteredYear = slug[0];
@@ -36,7 +37,7 @@ export default function FilteredEvents() {
 
   return (
     <div>
-      <h1>Filtered Events</h1>
+      <EventList items={filteredEvents} />
     </div>
   );
 }
