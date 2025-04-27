@@ -13,9 +13,20 @@ export default function FilteredEvents({
   },
 }) {
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Event</title>
+      <meta
+        name="description"
+        content={`A list of filtered event`}
+      />
+    </Head>
+  )
+
   if (hasError) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter, Please search valid values</p>
         </ErrorAlert>
@@ -29,6 +40,7 @@ export default function FilteredEvents({
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for chosen filter!</p>
         </ErrorAlert>
@@ -39,17 +51,21 @@ export default function FilteredEvents({
     );
   }
 
+  pageHeadData = (
+    <Head>
+      <title>{title}</title>
+      <meta
+        name="description"
+        content={description}
+      />
+    </Head>
+  )
+
   const date = new Date(year, month - 1);
 
   return (
     <div>
-      <Head>
-        <title>Filtered Event</title>
-        <meta
-          name="description"
-          content={`All events for ${month} / ${year}`}
-        />
-      </Head>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </div>
