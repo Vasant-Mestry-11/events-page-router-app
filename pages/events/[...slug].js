@@ -3,6 +3,7 @@ import ResultsTitle from "@/components/events/results-title";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { getFilteredEvents } from "@/helpers/apiUtils";
+import Head from "next/head";
 
 export default function FilteredEvents({
   hasError,
@@ -42,6 +43,13 @@ export default function FilteredEvents({
 
   return (
     <div>
+      <Head>
+        <title>Filtered Event</title>
+        <meta
+          name="description"
+          content={`All events for ${month} / ${year}`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </div>

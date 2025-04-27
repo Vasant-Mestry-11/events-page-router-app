@@ -2,6 +2,7 @@ import EventContent from "@/components/event-detail/event-content";
 import EventLogistic from "@/components/event-detail/event-logistic";
 import EventSummary from "@/components/event-detail/event-summary";
 import { getEventById, getFeaturedEvents } from "@/helpers/apiUtils";
+import Head from "next/head";
 
 export default function EventId({ event }) {
   if (!event) {
@@ -10,6 +11,13 @@ export default function EventId({ event }) {
   const { title, image, date, location, description } = event;
 
   return <>
+    <Head>
+      <title>{title}</title>
+      <meta
+        name="description"
+        content={description}
+      />
+    </Head>
     <EventSummary title={title} />
     <EventLogistic date={date} image={image} imageAlt={title} address={location} />
     <EventContent>{description}</EventContent>
