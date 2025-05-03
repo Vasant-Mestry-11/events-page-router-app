@@ -1,5 +1,15 @@
-export default function handler(req, res) {
-  if (res.method === "POST") {
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export default async function handler(req, res) {
+
+  const client = await MongoClient.connect(process.env.MONGO_CONNECTION_URL);
+
+  const db = client.db('events')
+
+  if (req.method === "POST") {
     const { eventId } = req.query;
 
     const { email, name, comment } = req.body;
@@ -15,16 +25,20 @@ export default function handler(req, res) {
       res.status(422).json({
         message: 'Invalid input'
       })
-      return
     }
 
     const newComment = {
-      id: new Date().toISOString(),
       email,
       name,
-      comment
+      comment,
+      eventId
     }
-    res.status(200).json({
+
+    const result = await db.collection('comments').insertOne(newComment);
+
+    newComment.id = result.insertedId;
+
+    res.status(201).json({
       message: "Success",
       comment: newComment
     });
@@ -40,4 +54,7 @@ export default function handler(req, res) {
       comments: dummyCommenst
     });
   }
+
+  client.close();
+
 }
