@@ -31,7 +31,7 @@ export default function NewComment(props) {
     props.onAddComment({
       email: enteredEmail,
       name: enteredName,
-      text: enteredComment,
+      comment: enteredComment,
     });
   }
 
