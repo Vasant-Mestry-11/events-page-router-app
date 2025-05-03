@@ -16,9 +16,9 @@ export default async function handler(req, res) {
 
     const client = await MongoClient.connect(process.env.MONGO_CONNECTION_URL);
 
-    const db = client.db("newsletter");
+    const db = client.db("events");
 
-    await db.collection("emails").insertOne({
+    await db.collection("newsletter").insertOne({
       email,
     });
 
