@@ -30,10 +30,14 @@ export default function handler(req, res) {
     });
   }
 
-  if (req.method === 'GET')
-  {
+  if (req.method === 'GET') {
+    const dummyCommenst = [
+      { id: 1, name: 'Vasant', comment: 'First comment' },
+      { id: 2, name: 'Pratham', comment: 'Second comment' },
+    ]
     res.status(200).json({
-      message: "THis is event specific req",
+      message: "Success",
+      comments: dummyCommenst
     });
   }
 }
