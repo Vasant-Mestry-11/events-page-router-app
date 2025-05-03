@@ -1,6 +1,7 @@
 import EventContent from "@/components/event-detail/event-content";
 import EventLogistic from "@/components/event-detail/event-logistic";
 import EventSummary from "@/components/event-detail/event-summary";
+import Comments from "@/components/input/comments";
 import { getEventById, getFeaturedEvents } from "@/helpers/apiUtils";
 import Head from "next/head";
 
@@ -8,7 +9,7 @@ export default function EventId({ event }) {
   if (!event) {
     return <div className="center"><p>Loading...</p></div>;
   }
-  const { title, image, date, location, description } = event;
+  const { title, image, date, location, description, id } = event;
 
   return <>
     <Head>
@@ -21,6 +22,7 @@ export default function EventId({ event }) {
     <EventSummary title={title} />
     <EventLogistic date={date} image={image} imageAlt={title} address={location} />
     <EventContent>{description}</EventContent>
+    <Comments eventId={id} />
   </>
 }
 

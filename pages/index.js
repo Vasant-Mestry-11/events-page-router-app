@@ -1,4 +1,5 @@
 import EventList from "@/components/events/event-list";
+import NewsletterRegistration from "@/components/input/newletter-registration";
 import { getFeaturedEvents } from "@/helpers/apiUtils";
 import Head from "next/head";
 
@@ -12,6 +13,7 @@ export default function HomePage({ events }) {
           content="Find a lot of great events that allow you evolve."
         />
       </Head>
+      <NewsletterRegistration />
       <EventList items={events} />
     </div>
   );

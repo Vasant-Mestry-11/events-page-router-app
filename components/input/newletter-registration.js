@@ -1,4 +1,4 @@
-import classes from './newsletter-registration.module.css';
+import classes from './newletter-registration.module.css';
 
 export default function NewsletterRegistration() {
   function registrationHandler(event) {
