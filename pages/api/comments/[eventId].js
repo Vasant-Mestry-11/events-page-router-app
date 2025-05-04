@@ -4,10 +4,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default async function handler(req, res) {
-
   const client = await MongoClient.connect(process.env.MONGO_CONNECTION_URL);
 
-  const db = client.db('events')
+  const db = client.db("events");
 
   if (req.method === "POST") {
     const { eventId } = req.query;
@@ -23,38 +22,41 @@ export default async function handler(req, res) {
       !comment.trim() === ""
     ) {
       res.status(422).json({
-        message: 'Invalid input'
-      })
+        message: "Invalid input",
+      });
     }
 
     const newComment = {
       email,
       name,
       comment,
-      eventId
-    }
+      eventId,
+    };
 
-    const result = await db.collection('comments').insertOne(newComment);
+    const result = await db.collection("comments").insertOne(newComment);
 
     newComment.id = result.insertedId;
 
     res.status(201).json({
       message: "Success",
-      comment: newComment
+      comment: newComment,
     });
   }
 
-  if (req.method === 'GET') {
-    const dummyCommenst = [
-      { id: 1, name: 'Vasant', comment: 'First comment' },
-      { id: 2, name: 'Pratham', comment: 'Second comment' },
-    ]
+  if (req.method === "GET") {
+    const comments = await db
+      .collection("comments")
+      .find()
+      .sort({
+        _id: -1,
+      })
+      .toArray();
+
     res.status(200).json({
       message: "Success",
-      comments: dummyCommenst
+      comments: comments,
     });
   }
 
   client.close();
-
 }

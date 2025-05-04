@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import classes from './comment-list.module.css';
 
 export default function CommentList({
@@ -8,8 +7,8 @@ export default function CommentList({
   return (
     <ul className={classes.comments}>
       {/* Render list of comments - fetched from API */}
-      {items.map(({ id, name, comment }) => (
-        <li key={id}>
+      {items.map(({ _id, name, comment }) => (
+        <li key={_id}>
           <p>{comment}</p>
           <div>
             By <address>{name}</address>
