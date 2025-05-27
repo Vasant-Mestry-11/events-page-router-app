@@ -1,18 +1,7 @@
-import { MongoClient } from "mongodb";
+import { connectDatabase } from "@/helpers/dbUtils";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-async function connectDatabase() {
-  const client = await MongoClient.connect(process.env.MONGO_CONNECTION_URL);
-  return client
-}
-
-async function insertDocument(client, document) {
-  const db = client.db("events");
-
-  return await db.collection("newsletter").insertOne(document);
-}
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -37,7 +26,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      await insertDocument(client, { email })
+      await insertDocument(client, 'newsletter', { email })
       client.close();
     } catch (error) {
       res.status(500).json({
