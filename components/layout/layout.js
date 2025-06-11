@@ -5,21 +5,18 @@ import Notification from "../ui/notification";
 
 export default function Layout({ children }) {
   const { notification } = useContext(NotificationContext);
-  const activeNotification = notification;
 
   return (
-    <>
-      <NotificationProvider>
-        <MainHeader />
-        <main>{children}</main>
-        {activeNotification && (
-          <Notification
-            title={activeNotification.title}
-            message={activeNotification.message}
-            status={activeNotification.status}
-          />
-        )}
-      </NotificationProvider>
-    </>
+    <NotificationProvider>
+      <MainHeader />
+      <main>{children}</main>
+      {notification && (
+        <Notification
+          title={notification?.title}
+          message={notification?.message}
+          status={notification?.status}
+        />
+      )}
+    </NotificationProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { connectDatabase } from "@/helpers/dbUtils";
+import { connectDatabase, insertDocument } from "@/helpers/dbUtils";
 import dotenv from "dotenv";
 
 dotenv.config();
